@@ -6,7 +6,11 @@ on:
     branches:
       - main
       - 'feature/*'
-
+env:
+  MONGO_URI: 'mongo-test'
+  MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+  
 jobs:
   unit-testing:
     runs-on: ubuntu-latest
@@ -16,6 +20,11 @@ jobs:
 
       - name: Install NodeJs
         run: sudo apt install nodejs -y
+      
+      # Yo can use the following action instead to Install NodeJS  
+      # - uses: actions/setup-node@v4
+      # with:
+      # node-version: '' # add the version number       
 
       - name: Install Dependacies
         run: npm install
